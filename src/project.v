@@ -2,9 +2,7 @@
  * Copyright (c) 2024 Your Name
  * SPDX-License-Identifier: Apache-2.0
  */
-
 `default_nettype none
-
 module tt_um_Parikshith2901_prbs31 (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
@@ -15,25 +13,21 @@ module tt_um_Parikshith2901_prbs31 (
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
-
-    reg [30:0] lfsr;
+    reg [30:0] lfsr; 
     always @(posedge clk or posedge rst_n) begin
         if (rst_n) begin
-            lfsr <= 31'd1;
-        end else begin
-            lfsr[0] <= lfsr[27] ^ lfsr[30];
-            lfsr[30:1] <= lfsr[29:0];
-        end
+        lfsr <= 31'd1; // Reset counter
+    end else begin
+        // Increment counter on each clock cycle
+        lfsr[0] <= lfsr[27] ^ lfsr[30] ;
+        lfsr[30:1] <=lfsr[29:0] ;  
     end
-   
+end  
   // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = lfsr[30];  // Example: ou_out is the sum of ui_in and uio_in
+  assign uo_out[0] =lfsr[30] ;
   assign uio_out = 0;
   assign uio_oe  = 0;
-  assign u0_out[7:1] = 7'd0;
-    
-
+  assign uo_out[7:1]= 7'd0;
   // List all unused inputs to prevent warnings
-    wire _unused = &{ena, uio_in, ui_in, 1'b0};
-
+    wire _unused = &{ena, uio_in, ui_in, 1'b0}; 
 endmodule
