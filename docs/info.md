@@ -18,6 +18,6 @@ Input Clock and reset (Low high, then low)
 Take the output out of port io_out[0] and feed it back into the chip (after transmitting it if you like.) iio_out[1] will be zero after 31 clock cycles  if the data is correct.
 You can also capture the data and check it against the code at the end of the co-lab code listed above.
 
-## External hardware
+## External hardware:
 
 ADALM2000
